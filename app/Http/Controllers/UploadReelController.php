@@ -25,7 +25,7 @@ class UploadReelController extends Controller
 
             $apiService = new APIService();
             $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl, $caption);
-            sleep(10);
+            sleep(20);
             $result = $apiService->graphAPIPostVideoAsReel($videoID);
             if($result)
              return redirect()->back()->with('success', 'Reel has been uploaded');
