@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Http\Exceptions\PostTooLargeException;
+
 
 class Handler extends ExceptionHandler
 {
@@ -24,7 +26,11 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
+        });
+
+        $this->renderable(function(PostTooLargeException $e) {
+             return redirect()->back()->with('error', 'The file you are trying to upload is too large.');
         });
     }
+
 }

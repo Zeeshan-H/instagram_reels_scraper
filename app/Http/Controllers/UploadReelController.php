@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\API\APIService;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
 
 
 class UploadReelController extends Controller
 {
     public function saveReelToHeroku(Request $request)
     {
-        $request->validate([
-            'video' => 'max:10240', // Assuming a maximum file size of 10 MB
+        $validator = Validator::make($request->all(), [
+            'video' => 'max:10204',
         ]);
+        dd($validator);
         $caption = $request->caption;
 
         $file = $request->file('video');

@@ -36,11 +36,12 @@
         </div>
     @endif
 
-        @if(session()->has('error'))
-            <div class="alert alert-danger">
-                {{ session()->get('error') }}
-            </div>
-        @endif
+    @if(session()->has('error'))
+       <div class="alert alert-danger">
+            {{ session()->get('error') }}
+       </div>
+    @endif
+
     @foreach($data as $record)
     <div class="row">
         <div class="col">
