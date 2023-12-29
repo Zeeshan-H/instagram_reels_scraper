@@ -25,7 +25,7 @@ class APIService {
         return $videoID;
     }
 
-    function graphAPIPostVideoAsReel($videoID)
+    function graphAPIPostVideoAsReel($videoID): bool
     {
         $url = 'https://graph.facebook.com/v18.0/17841461509998509/media_publish';
         try {
@@ -38,11 +38,11 @@ class APIService {
                     'creation_id' => $videoID
                 ]
             ]);
-
+            return true;
 //            dd("Success");
         }
         catch (RequestException $e) {
-            dd($e->getMessage());
+            return false;
         }
 
     }

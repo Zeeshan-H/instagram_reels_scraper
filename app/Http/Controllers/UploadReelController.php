@@ -25,10 +25,13 @@ class UploadReelController extends Controller
             $apiService = new APIService();
             $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl, $caption);
             sleep(10);
-            $apiService->graphAPIPostVideoAsReel($videoID);
-            return redirect()->back()->with('success', 'Reel has been uploaded');
+            $result = $apiService->graphAPIPostVideoAsReel($videoID);
+            if($result)
+             return redirect()->back()->with('success', 'Reel has been uploaded');
+            else
+             return redirect()->back()->with('error', 'There was an error uploading video to Instagram as Reel');
         }
         else
-        return redirect()->back()->with('error', 'There was an error uploading video to Instagram as Reel');
+        return redirect()->back()->with('error', 'No video is selected');
     }
 }
