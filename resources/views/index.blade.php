@@ -22,12 +22,25 @@
             @csrf
         <label for="formFile" class="form-label">Upload Video to Instagram Reel</label>
         <input class="form-control" type="file" id="formFile" name="video" accept="video/mp4" required>
+        <input type="text" class="form-control mt-2 mb-2" id="caption" name="caption" placeholder="Enter the caption..." required/>
         <input type="submit" value="Upload" class="btn btn-primary">
         </form>
     </div>
 </div>
 
 <div class="container">
+
+    @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
+        @if(session()->has('error'))
+            <div class="alert alert-danger">
+                {{ session()->get('error') }}
+            </div>
+        @endif
     @foreach($data as $record)
     <div class="row">
         <div class="col">

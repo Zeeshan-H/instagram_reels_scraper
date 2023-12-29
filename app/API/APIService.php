@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Config;
 class APIService {
 
 
-    function graphAPIPostVideoToGetID($videoUrl): String
+    function graphAPIPostVideoToGetID($videoUrl, $caption): String
     {
-        $url = 'https://graph.facebook.com/v18.0/17841461509998509/media?video_url='. $videoUrl .'&media_type=REELS&caption=Testing#test';
+        $url = 'https://graph.facebook.com/v18.0/17841461509998509/media?video_url='. $videoUrl .'&media_type=REELS&caption='. $caption;
         $token = Config::get('api.token');
 
         $client = new Client();
@@ -23,7 +23,6 @@ class APIService {
         $decodedResponse = json_decode($response->getBody()->getContents(), true);
         $videoID = $decodedResponse['id'];
         return $videoID;
-//        dd($response->getBody()->getContents(), $videoUrl);
     }
 
     function graphAPIPostVideoAsReel($videoID)
@@ -40,7 +39,7 @@ class APIService {
                 ]
             ]);
 
-            dd("Success");
+//            dd("Success");
         }
         catch (RequestException $e) {
             dd($e->getMessage());
