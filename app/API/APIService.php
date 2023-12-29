@@ -36,11 +36,12 @@ class APIService {
             $response = $client->post($url, [
                 'headers' => ['Authorization' => 'Bearer ' . $token],
             ]);
+
+            dd("Success");
         }
         catch (RequestException $e) {
             dd($e->getMessage());
         }
 
-        dd($response->getBody()->getContents());
     }
 }
