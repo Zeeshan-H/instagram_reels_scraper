@@ -11,8 +11,8 @@ class UploadReelController extends Controller
 {
     public function saveReelToHeroku(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'video' => 'max:10204',
+        $validated = $request->validate([
+            'video' => 'max:10240'
         ]);
         $caption = $request->caption;
 
