@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\API\APIService;
 use Illuminate\Http\Request;
+use Instagram\User\Media;
+
 
 class UploadReelController extends Controller
 {
