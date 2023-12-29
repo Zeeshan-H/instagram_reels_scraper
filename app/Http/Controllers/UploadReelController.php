@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\API\APIService;
 use Illuminate\Http\Request;
 
 class UploadReelController extends Controller
@@ -13,15 +14,16 @@ class UploadReelController extends Controller
         ]);
 
         $file = $request->file('video');
-//        dd($file);
-//        dd($file->getFilename());
+
         $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
         if($file->move('Uploads', $uniqueFileName))
         {
-            $fileUrl = url('Uploads/' . $uniqueFileName);
+            $videoUrl = url('Uploads/' . $uniqueFileName);
 
             // Print the URL or use it as needed
-            dd('Upload Success. File URL: ' . $fileUrl);
+            $apiService = new APIService();
+            $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl);
+            $apiService->graphAPIPostVideoAsReel($videoID);
         }
         else
         dd("Not saved");
