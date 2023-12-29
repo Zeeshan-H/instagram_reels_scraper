@@ -14,7 +14,6 @@ class UploadReelController extends Controller
         $validator = Validator::make($request->all(), [
             'video' => 'max:10204',
         ]);
-        dd($validator);
         $caption = $request->caption;
 
         $file = $request->file('video');
