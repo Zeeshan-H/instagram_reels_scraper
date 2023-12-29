@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::post('/uploadReel', [\App\Http\Controllers\UploadReelController::class, 'saveReelToHeroku'])->name('upload.heroku');

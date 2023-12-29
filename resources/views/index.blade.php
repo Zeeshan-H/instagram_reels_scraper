@@ -15,7 +15,17 @@
 
 
 {{--<div class="embedsocial-hashtag" data-ref="27d967cab2282d3b4e7cfbe23bc20e0de9f05209"> <a class="feed-powered-by-es feed-powered-by-es-feed-img" href="https://embedsocial.com/social-media-aggregator/" target="_blank" title="Instagram widget"> <img src="https://embedsocial.com/cdn/images/embedsocial-icon.png" alt="EmbedSocial"> Instagram widget </a> </div>--}}
-<div id="instafeed"></div>
+<div id="uploadReels">
+
+    <div class="mb-3 p-3">
+        <form method="post" action="{{ route('upload.heroku') }}" enctype="multipart/form-data">
+            @csrf
+        <label for="formFile" class="form-label">Upload Video to Instagram Reel</label>
+        <input class="form-control" type="file" id="formFile" name="video" accept="video/mp4" required>
+        <input type="submit" value="Upload" class="btn btn-primary">
+        </form>
+    </div>
+</div>
 
 <div class="container">
     @foreach($data as $record)
