@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\API\APIService;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Validator;
+use Illuminate\Validation\Validator;;
 use FFMpeg\FFMpeg;
-
 class UploadReelController extends Controller
 {
     public function saveReelToHeroku(Request $request)
@@ -19,20 +18,23 @@ class UploadReelController extends Controller
         $file = $request->file('video');
 
         $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
+        $outputPath = public_path('Uploads/' . $uniqueFileName);
+
         if($file->move('Uploads', $uniqueFileName))
         {
             $videoUrl = url('Uploads/' . $uniqueFileName);
 
-            // Use Laravel-FFMpeg to convert the video
-            FFMpeg::fromDisk('local')
-                ->open($file->getPathname())
-                ->export()
-                ->toDisk('local')
-                ->inFormat(new X264('aac'))
-                ->onProgress(function ($percentage) {
-                    // Handle progress updates if needed
-                })
-                ->save(storage_path('app/public/Uploads/' . $uniqueFileName));
+//            // Use Laravel-FFMpeg to convert the video
+//            $ffmpeg = FFMpeg::create();
+//            $video = $ffmpeg->open($file->getPathname());
+//
+//            $video
+//                ->filters()
+//                ->resize(new \FFMpeg\Coordinate\Dimension(640, 480))
+//                ->synchronize();
+//
+//            $video
+//                ->save(new X264(), $outputPath . '.mp4');
 
 
             $apiService = new APIService();
