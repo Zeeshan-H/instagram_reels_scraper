@@ -30,7 +30,7 @@ class UploadReelController extends Controller
 //            // Print the URL or use it as needed
             $apiService = new APIService();
             $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl);
-            $apiService->graphAPIPostVideoAsReel($videoID);
+//            $apiService->graphAPIPostVideoAsReel($videoID);
             dd($videoID, $videoUrl);
 
         }
