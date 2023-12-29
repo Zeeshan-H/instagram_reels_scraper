@@ -28,13 +28,16 @@ class APIService {
 
     function graphAPIPostVideoAsReel($videoID)
     {
-        $url = 'https://graph.facebook.com/v18.0/17841461509998509/media_publish?creation_id='. $videoID;
+        $url = 'https://graph.facebook.com/v18.0/17841461509998509/media_publish';
         try {
             $token = Config::get('api.token');
 
             $client = new Client();
             $response = $client->post($url, [
                 'headers' => ['Authorization' => 'Bearer ' . $token],
+                'form_params' => [
+                    'creation_id' => $videoID
+                ]
             ]);
 
             dd("Success");

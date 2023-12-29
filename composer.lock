@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23130cd5548dbc7a067b2fdfc244f118",
+    "content-hash": "757b90f00ba1a167db64e36a74ce5321",
     "packages": [
         {
             "name": "brick/math",
@@ -1091,55 +1091,6 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
-        },
-        {
-            "name": "jstolpe/instagram-graph-api-php-sdk",
-            "version": "v1.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jstolpe/instagram-graph-api-php-sdk.git",
-                "reference": "1d849992c675f8a7f78a93227e0dbee9bcda6f78"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jstolpe/instagram-graph-api-php-sdk/zipball/1d849992c675f8a7f78a93227e0dbee9bcda6f78",
-                "reference": "1d849992c675f8a7f78a93227e0dbee9bcda6f78",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6|^7.0|^8.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Instagram\\": "src/Instagram/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Justin Stolpe",
-                    "homepage": "https://github.com/jstolpe/instagram-graph-api-php-sdk"
-                }
-            ],
-            "description": "Instagram Graph API PHP SDK",
-            "homepage": "https://github.com/jstolpe/instagram-graph-api-php-sdk",
-            "keywords": [
-                "api",
-                "graph api",
-                "instagram",
-                "instagram graph api",
-                "php",
-                "sdk"
-            ],
-            "support": {
-                "issues": "https://github.com/jstolpe/instagram-graph-api-php-sdk/issues",
-                "source": "https://github.com/jstolpe/instagram-graph-api-php-sdk/tree/v1.0.5"
-            },
-            "time": "2022-11-03T13:10:35+00:00"
         },
         {
             "name": "laravel/framework",

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\API\APIService;
 use Illuminate\Http\Request;
-use Instagram\User\Media;
 
 
 class UploadReelController extends Controller
@@ -26,31 +25,13 @@ class UploadReelController extends Controller
         if($file->move('Uploads', $uniqueFileName))
         {
             $videoUrl = url('Uploads/' . $uniqueFileName);
-            $media = new Media( $config );
-
-            $videoContainerParams = array( // container parameters for the video post
-                                'caption' => 'Another test', // caption for the post
-                                'video_url' => $videoUrl, // url to the video must be on a public server
-                                'media_type' => 'REELS', // specifying this should be set to VIDEO
-                                'is_carousel_item' => false, // is this in a carousel
-                'location_id' => '', // can be left blank otherwise the id of the facebook page associated with the location you want tagged
-                'thumb_offset' => 2 // number of milliseconds in the video to grab the thumbnail
-            );
-
-            // create video container
-            $videoContainer = $media->create( $videoContainerParams );
-            dd($videoContainer);
-            // get id of the video container
-            $videoContainerId = $videoContainer['id'];
-
-            dd($videoContainerId, $videoUrl);
 
 //            dd($videoUrl);
 //            // Print the URL or use it as needed
-//            $apiService = new APIService();
-//            $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl);
-////            dd($videoID, $videoUrl);
-//            $apiService->graphAPIPostVideoAsReel($videoID);
+            $apiService = new APIService();
+            $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl);
+            $apiService->graphAPIPostVideoAsReel($videoID);
+            dd($videoID, $videoUrl);
 
         }
         else
