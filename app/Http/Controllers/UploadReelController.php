@@ -39,7 +39,7 @@ class UploadReelController extends Controller
 
             // create video container
             $videoContainer = $media->create( $videoContainerParams );
-
+            dd($videoContainer);
             // get id of the video container
             $videoContainerId = $videoContainer['id'];
 
