@@ -18,7 +18,7 @@ class UploadReelController extends Controller
 
         $file = $request->file('video');
 
-        $uniqueFileName = $file->getClientOriginalName();
+        $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
         if($file->move('Uploads', $uniqueFileName))
         {
             $videoUrl = url('Uploads/' . $uniqueFileName);
