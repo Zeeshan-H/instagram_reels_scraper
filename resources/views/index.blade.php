@@ -6,6 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        .blue-text {
+            color: blue;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
@@ -22,8 +27,11 @@
             @csrf
         <label for="formFile" class="form-label">Upload Video to Instagram Reel</label>
         <input class="form-control" type="file" id="formFile" name="video" accept="video/mp4" required>
-        <input type="text" class="form-control mt-2 mb-2" id="caption" name="caption" placeholder="Enter the caption..." required/>
-        <input type="submit" value="Upload" class="btn btn-primary">
+        <input type="text" class="form-control mt-2 mb-2" id="caption" name="caption" placeholder="Enter the caption..."
+              oninput="handleInput(this)" required/>
+            <div id="displayText" class="d-none"></div>
+
+            <input type="submit" value="Upload" class="btn btn-primary">
         </form>
     </div>
 </div>
@@ -71,7 +79,30 @@
 @section("script")
     <script async src="https://www.instagram.com/embed.js"></script>
 
+    <script type="text/javascript">
+        let textWithMentions = '';
+        function handleInput(inputElement) {
+            // console.log(text);
+            let text = inputElement.value;
+            const displayText = document.getElementById('displayText');
 
+            // Process hashtags and mentions and change color
+            const coloredText = text.replace(/(#\w+|@\w+)/g, '<span class="blue-text">$1</span>');
+
+
+            // Set the processed text in the display area
+            displayText.innerHTML = coloredText;
+
+            // Set the processed text as the value of the input field
+            inputElement.setAttribute('value', text);
+
+            displayText.classList.toggle('d-none', !(/#|@/.test(text)));
+
+
+
+        }
+
+    </script>
 @show
 
 </body>
