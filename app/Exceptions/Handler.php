@@ -28,9 +28,9 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
         });
 
-//        $this->renderable(function(PostTooLargeException $e) {
-//             return redirect()->back()->with('error', 'The file you are trying to upload is too large.');
-//        });
+        $this->renderable(function(PostTooLargeException $e) {
+             return response()->json(['error', 'The file you are trying to upload is too large.']);
+        });
     }
 
 }

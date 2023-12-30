@@ -125,10 +125,10 @@
                     });
                 })
                 .catch(error => {
-                    console.log(error.response.message);
+                    console.log(error);
                         Swal.fire({
                             title: "Error",
-                            text: "An error occurred during the upload.",
+                            text: error,
                             icon: "error",
                             confirmButtonText: "OK"
                         });
