@@ -6,6 +6,8 @@ use App\API\APIService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;;
 use FFMpeg\FFMpeg;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class UploadReelController extends Controller
 {
     public function saveReelToHeroku(Request $request)
@@ -22,6 +24,7 @@ class UploadReelController extends Controller
 
         if($file->move('Uploads', $uniqueFileName))
         {
+
             $videoUrl = url('Uploads/' . $uniqueFileName);
 
 //            // Use Laravel-FFMpeg to convert the video
@@ -41,10 +44,9 @@ class UploadReelController extends Controller
             $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl, $caption);
             sleep(10);
             $result = $apiService->graphAPIPostVideoAsReel($videoID);
-            if($result)
-             return redirect()->back()->with('success', 'Reel has been uploaded');
-            else
-             return redirect()->back()->with('error', 'There was an error uploading video to Instagram as Reel');
+            if($result) {
+                return response()->json(['success' => 'Video was successfully uploaded as a Instagram reel.']);
+            }
         }
         else
         return redirect()->back()->with('error', 'No video is selected');
