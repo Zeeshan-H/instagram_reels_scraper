@@ -12,9 +12,6 @@ class UploadReelController extends Controller
 {
     public function saveReelToHeroku(Request $request)
     {
-        $validated = $request->validate([
-            'video' => 'max:10240'
-        ]);
         $caption = $request->caption;
 
         $file = $request->file('video');
