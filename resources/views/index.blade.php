@@ -54,6 +54,7 @@
         </div>
     @endif
 
+
     @foreach($data as $record)
         <div class="row">
             <div class="col">
