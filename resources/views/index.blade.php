@@ -128,7 +128,7 @@
                     console.log(error);
                         Swal.fire({
                             title: "Error",
-                            text: error,
+                            text: 'Error occured while uploading video as reel to Instagram',
                             icon: "error",
                             confirmButtonText: "OK"
                         });
