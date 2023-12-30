@@ -48,7 +48,6 @@ class UploadReelController extends Controller
                 return response()->json(['success' => 'Video was successfully uploaded as a Instagram reel.']);
             }
         }
-        else
-        return redirect()->back()->with('error', 'No video is selected');
+        return response()->json(['error' => 'An error occurred while uploading video as reel to Instagram']);
     }
 }

@@ -125,16 +125,14 @@
                     });
                 })
                 .catch(error => {
-                // Handle errors
-                console.error("Error:", error);
+                    console.log(error.response.message);
+                        Swal.fire({
+                            title: "Error",
+                            text: "An error occurred during the upload.",
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        });
 
-                // Show SweetAlert error message
-                Swal.fire({
-                    title: "Error",
-                    text: "An error occurred during the upload.",
-                    icon: "error",
-                    confirmButtonText: "OK"
-                });
             });;
         }
 
