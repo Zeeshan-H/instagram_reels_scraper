@@ -32,7 +32,7 @@
         <form method="post" id="form-upload" enctype="multipart/form-data">
             @csrf
             <label for="formFile" class="form-label">Upload Video to Instagram Reel</label>
-            <input class="form-control" type="file" id="formFile" name="video" accept="video/mp4" required>
+            <input class="form-control" type="file" id="formFile" name="video" accept="video/mp4" required onchange="handleInput2(this)">
             <input type="text" class="form-control mt-2 mb-2" id="caption" name="caption" placeholder="Enter the caption..."
                    oninput="handleInput(this)" required/>
             <div id="displayText" class="d-none"></div>
@@ -101,6 +101,25 @@
 
         }
 
+        function handleInput2(fileInput) {
+            const maxSizeMB = 10; // Maximum allowed size in megabytes
+            const maxSizeBytes = maxSizeMB * 1024 * 1024; // Convert to bytes
+            const fileSize = fileInput.files[0]?.size;
+
+            if (fileSize && fileSize > maxSizeBytes) {
+                // Show a SweetAlert indicating that the file size is too large
+                Swal.fire({
+                    title: "File Size Too Large",
+                    text: `The uploaded file is too large. Please upload a file smaller than ${maxSizeMB} MB.`,
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
+
+                // Reset the file input to clear the selected file
+                fileInput.value = "";
+            }
+        }
+
         function uploadVideo()
         {
             const form = document.getElementById('form-upload');
@@ -116,7 +135,7 @@
                 .then(response => response.json())
                 .then(data => {
                     Swal.fire({
-                        title: "Success",
+                        title: "Success!",
                         text: data.success,
                         icon: "success",
                         showConfirmButton: true,
