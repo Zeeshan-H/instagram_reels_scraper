@@ -13,25 +13,22 @@ class UploadReelController extends Controller
 {
     public function saveReelToHeroku(Request $request)
     {
-        $caption = $request->caption;
+            $caption = $request->caption;
 
-        $file = $request->file('video');
+            $file = $request->file('video');
 
-        $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
-        $outputPath = public_path('Uploads/' . $uniqueFileName);
-
-        if($file->move('Uploads', $uniqueFileName))
-        {
-
-            $videoUrl = url('Uploads/' . $uniqueFileName);
+            $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
+            $outputPath = public_path('Uploads/' . $uniqueFileName);
 
 //            // Use Laravel-FFMpeg to convert the video
-//            $ffmpeg = FFMpeg::create();
-//            $video = $ffmpeg->open($outputPath);
-//            $format = new X264();
-//            $format->setAudioCodec("aac");
-//            $format->setAdditionalParameters(explode(' ', '-pix_fmt yuv420p -b:v 4000k'));
-//            $video->save($format, 'ffmpeg-'. $uniqueFileName);
+            $ffmpeg = FFMpeg::create();
+            $video = $ffmpeg->open($outputPath);
+            $format = new X264();
+            $format->setAudioCodec("aac");
+            $format->setAdditionalParameters(explode(' ', '-pix_fmt yuv420p -b:v 4000k'));
+            $video->save($format, 'Uploads/ffmpeg-'. $uniqueFileName);
+
+            $videoUrl = url('Uploads/ffmpeg-'. $uniqueFileName);
 
             $apiService = new APIService();
             $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl, $caption);
@@ -42,7 +39,5 @@ class UploadReelController extends Controller
             }
             else
                 return response()->json(['error' => 'Video doesnt meet Instagram reel requirements.']);
-        }
-        return response()->json(['error' => 'An error occurred while uploading video as reel to Instagram']);
     }
 }
