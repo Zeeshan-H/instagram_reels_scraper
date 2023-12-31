@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\API\APIService;
+use FFMpeg\Format\Video\X264;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;;
 use FFMpeg\FFMpeg;
@@ -26,16 +27,11 @@ class UploadReelController extends Controller
 
 //            // Use Laravel-FFMpeg to convert the video
 //            $ffmpeg = FFMpeg::create();
-//            $video = $ffmpeg->open($file->getPathname());
-//
-//            $video
-//                ->filters()
-//                ->resize(new \FFMpeg\Coordinate\Dimension(640, 480))
-//                ->synchronize();
-//
-//            $video
-//                ->save(new X264(), $outputPath . '.mp4');
-
+//            $video = $ffmpeg->open($outputPath);
+//            $format = new X264();
+//            $format->setAudioCodec("aac");
+//            $format->setAdditionalParameters(explode(' ', '-pix_fmt yuv420p -b:v 4000k'));
+//            $video->save($format, 'ffmpeg-'. $uniqueFileName);
 
             $apiService = new APIService();
             $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl, $caption);
