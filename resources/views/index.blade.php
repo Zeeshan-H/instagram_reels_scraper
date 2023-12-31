@@ -134,14 +134,24 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    Swal.fire({
-                        title: "Success!",
-                        text: data.success,
-                        icon: "success",
-                        showConfirmButton: true,
-                        allowEscapeKey: false,
-                        allowOutsideClick: false
-                    });
+                    if(data.success) {
+                        Swal.fire({
+                            title: "Success!",
+                            text: data.success,
+                            icon: "success",
+                            showConfirmButton: true,
+                            allowEscapeKey: false,
+                            allowOutsideClick: false
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            title: "Error",
+                            text: data.error,
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        });
+                    }
                 })
                 .catch(error => {
                     console.log(error);
