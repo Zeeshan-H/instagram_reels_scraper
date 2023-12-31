@@ -13,12 +13,17 @@ class UploadReelController extends Controller
 {
     public function saveReelToHeroku(Request $request)
     {
-            $caption = $request->caption;
+        $caption = $request->caption;
 
-            $file = $request->file('video');
+        $file = $request->file('video');
 
-            $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
-            $outputPath = public_path('Uploads/' . $uniqueFileName);
+        $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
+        $outputPath = public_path('Uploads/' . $uniqueFileName);
+
+        if($file->move('Uploads', $uniqueFileName))
+        {
+
+            $videoUrl1 = url('Uploads/' . $uniqueFileName);
 
 //            // Use Laravel-FFMpeg to convert the video
             $ffmpeg = FFMpeg::create();
@@ -28,10 +33,10 @@ class UploadReelController extends Controller
             $format->setAdditionalParameters(explode(' ', '-pix_fmt yuv420p -b:v 4000k'));
             $video->save($format, 'Uploads/ffmpeg-'. $uniqueFileName);
 
-            $videoUrl = url('Uploads/ffmpeg-'. $uniqueFileName);
+            $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
 
             $apiService = new APIService();
-            $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl, $caption);
+            $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl2, $caption);
             sleep(10);
             $result = $apiService->graphAPIPostVideoAsReel($videoID);
             if($result) {
@@ -39,5 +44,7 @@ class UploadReelController extends Controller
             }
             else
                 return response()->json(['error' => 'Video doesnt meet Instagram reel requirements.']);
+        }
+        return response()->json(['error' => 'An error occurred while uploading video as reel to Instagram']);
     }
 }
