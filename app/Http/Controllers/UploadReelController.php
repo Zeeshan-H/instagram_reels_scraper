@@ -14,7 +14,6 @@ class UploadReelController extends Controller
     public function saveReelToHeroku(Request $request)
     {
         $caption = $request->caption;
-
         $file = $request->file('video');
 
         $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
