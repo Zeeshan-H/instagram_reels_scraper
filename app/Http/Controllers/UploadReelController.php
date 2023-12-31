@@ -44,6 +44,8 @@ class UploadReelController extends Controller
             if($result) {
                 return response()->json(['success' => 'Video was successfully uploaded as a Instagram reel.']);
             }
+            else
+                return response()->json(['error' => 'Video doesnt meet Instagram reel requirements.']);
         }
         return response()->json(['error' => 'An error occurred while uploading video as reel to Instagram']);
     }
