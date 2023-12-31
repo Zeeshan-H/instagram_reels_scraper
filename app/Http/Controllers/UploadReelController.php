@@ -25,17 +25,17 @@ class UploadReelController extends Controller
             $videoUrl1 = url('Uploads/' . $uniqueFileName);
 
 //            // Use Laravel-FFMpeg to convert the video
-            $ffmpeg = FFMpeg::create();
-            $video = $ffmpeg->open($outputPath);
-            $format = new X264();
-            $format->setAudioCodec("aac");
-            $format->setAdditionalParameters(explode(' ', '-pix_fmt yuv420p -b:v 4000k'));
-            $video->save($format, 'Uploads/ffmpeg-'. $uniqueFileName);
-
-            $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
+//            $ffmpeg = FFMpeg::create();
+//            $video = $ffmpeg->open($outputPath);
+//            $format = new X264();
+//            $format->setAudioCodec("aac");
+//            $format->setAdditionalParameters(explode(' ', '-pix_fmt yuv420p -b:v 4000k'));
+//            $video->save($format, 'Uploads/ffmpeg-'. $uniqueFileName);
+//
+//            $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
 
             $apiService = new APIService();
-            $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl2, $caption);
+            $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl1, $caption);
             sleep(10);
             $result = $apiService->graphAPIPostVideoAsReel($videoID);
             if($result) {
