@@ -63,7 +63,7 @@
                         {{--                   <img src="{{ $record['displayUrl'] }}" height="300" />--}}
                         <blockquote class="instagram-media" data-instgrm-permalink="{{ $record['url'] }}" data-instgrm-version="13"></blockquote>
                         <script async src="https://www.instagram.com/embed.js"></script>
-                        <strong class="caption p-2">{{ strtok($record['caption'], '.') }} <br />
+                        <strong class="caption p-2">{{ strtok($record['caption'], '.') }} <br /><br />
                             &nbsp; &nbsp; #babybara #capybara #capybaras #capy #capybaralove #capybaralife
                         </strong>
                         <h3>Download URL: <a href="{{ $record['videoUrl'] }}">Here</a></h3>
