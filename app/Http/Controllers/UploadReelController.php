@@ -6,7 +6,7 @@ use App\API\APIService;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;;
-use FFMpeg\FFMpeg;
+//use FFMpeg\FFMpeg;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UploadReelController extends Controller
