@@ -13,7 +13,7 @@ use Instagram\Hydrator\{LocationHydrator,
     MediaHydrator,
     MediaCommentsHydrator,
     ProfileAlternativeHydrator,
-    ReelsFeedHydrator,
+//    ReelsFeedHydrator,
     StoriesHydrator,
     StoryHighlightsHydrator,
     ProfileHydrator,
@@ -30,7 +30,7 @@ use Instagram\Model\{Location,
     Profile,
     Hashtag,
     ProfileStory,
-    ReelsFeed,
+//    ReelsFeed,
     StoryHighlights,
     StoryHighlightsFolder,
     FollowerFeed,
@@ -63,6 +63,8 @@ use Instagram\Transport\{CommentPost,
 };
 use Psr\Cache\CacheItemPoolInterface;
 use Instagram\Utils\{InstagramHelper, OptionHelper};
+use App\API\InstagramService\Model\ReelsFeed;
+use App\API\InstagramService\Hydrator\ReelsFeedHydrator;
 
 class Api
 {
