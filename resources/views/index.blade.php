@@ -99,6 +99,7 @@
 
     <script type="text/javascript">
         let textWithMentions = '';
+        var fileInput = document.getElementById('formFile');
 
         function handleInput(inputElement) {
             // console.log(text);
@@ -145,44 +146,49 @@
             const form = document.getElementById('form-upload');
             const formData = new FormData(form);
 
-            showLoadingDialog();
+            if(fileInput.files.length === 0) {
+                alert('Please upload a video');
+            }
 
 
-            fetch("{{ route('upload.heroku') }}", {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if(data.success) {
-                        Swal.fire({
-                            title: "Success!",
-                            text: data.success,
-                            icon: "success",
-                            showConfirmButton: true,
-                            allowEscapeKey: false,
-                            allowOutsideClick: false
-                        });
-                    }
-                    else {
-                        Swal.fire({
-                            title: "Error",
-                            text: data.error,
-                            icon: "error",
-                            confirmButtonText: "OK"
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                        Swal.fire({
-                            title: "Error",
-                            text: 'Error occured while uploading video as reel to InstagramService',
-                            icon: "error",
-                            confirmButtonText: "OK"
-                        });
+            {{--showLoadingDialog();--}}
 
-            });;
+
+            {{--fetch("{{ route('upload.heroku') }}", {--}}
+            {{--    method: "POST",--}}
+            {{--    body: formData--}}
+            {{--})--}}
+            {{--    .then(response => response.json())--}}
+            {{--    .then(data => {--}}
+            {{--        if(data.success) {--}}
+            {{--            Swal.fire({--}}
+            {{--                title: "Success!",--}}
+            {{--                text: data.success,--}}
+            {{--                icon: "success",--}}
+            {{--                showConfirmButton: true,--}}
+            {{--                allowEscapeKey: false,--}}
+            {{--                allowOutsideClick: false--}}
+            {{--            });--}}
+            {{--        }--}}
+            {{--        else {--}}
+            {{--            Swal.fire({--}}
+            {{--                title: "Error",--}}
+            {{--                text: data.error,--}}
+            {{--                icon: "error",--}}
+            {{--                confirmButtonText: "OK"--}}
+            {{--            });--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--    .catch(error => {--}}
+            {{--        console.log(error);--}}
+            {{--            Swal.fire({--}}
+            {{--                title: "Error",--}}
+            {{--                text: 'Error occured while uploading video as reel to InstagramService',--}}
+            {{--                icon: "error",--}}
+            {{--                confirmButtonText: "OK"--}}
+            {{--            });--}}
+
+            {{--});--}}
         }
 
         function showLoadingDialog(event) {

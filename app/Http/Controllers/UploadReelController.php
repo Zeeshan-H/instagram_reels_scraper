@@ -19,6 +19,8 @@ class UploadReelController extends Controller
         $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
         $outputPath = public_path('Uploads/' . $uniqueFileName);
 
+        dd($outputPath);
+
         if($file->move('Uploads', $uniqueFileName))
         {
 
