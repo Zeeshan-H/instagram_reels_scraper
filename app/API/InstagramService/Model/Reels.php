@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace InstagramService\Model;
+namespace App\API\InstagramService\Model;
 
 class Reels
 {

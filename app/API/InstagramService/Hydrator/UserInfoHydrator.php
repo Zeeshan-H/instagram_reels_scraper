@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace InstagramService\Hydrator;
+namespace App\API\InstagramService\Hydrator;
 
-use InstagramService\Model\User;
+use App\API\InstagramService\Model\User;
 
 class UserInfoHydrator
 {

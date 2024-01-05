@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace InstagramService\Transport;
+namespace App\API\InstagramService\Transport;
 
 use GuzzleHttp\Cookie\SetCookie;
 use GuzzleHttp\Exception\ClientException;

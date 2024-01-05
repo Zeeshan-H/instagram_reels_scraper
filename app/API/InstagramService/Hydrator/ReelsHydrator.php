@@ -2,17 +2,15 @@
 
 declare(strict_types=1);
 
-namespace InstagramService\Hydrator;
+namespace App\API\InstagramService\Hydrator;
 
-use InstagramService\Hydrator\UserInfoHydrator;
-use InstagramService\Model\Reels;
-use InstagramService\Utils\InstagramHelper;
+use App\API\InstagramService\Hydrator\UserInfoHydrator;
+use App\API\InstagramService\Model\Reels;
+use App\API\InstagramService\Utils\InstagramHelper;
 
 class ReelsHydrator
 {
-    /**
-     * @var UserInfoHydrator
-     */
+
     private $hydrateUser;
 
     public function __construct()

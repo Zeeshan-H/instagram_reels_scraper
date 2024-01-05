@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace InstagramService\Utils;
+namespace App\API\InstagramService\Utils;
 
 class InstagramHelper
 {

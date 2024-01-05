@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace InstagramService\Hydrator;
+namespace App\API\InstagramService\Hydrator;
 
-use InstagramService\Hydrator\ReelsHydrator;
-use InstagramService\Model\ReelsFeed;
+use App\API\InstagramService\Hydrator\ReelsHydrator;
+use App\API\InstagramService\Model\ReelsFeed;
 
 class ReelsFeedHydrator
 {
