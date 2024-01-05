@@ -84,7 +84,7 @@
                             <script async src="https://www.instagram.com/embed.js"></script>
                             <strong class="caption p-2">{{ $reel['caption'] }}
                             </strong>
-                            <h3>Download URL: <a href="{{ $reel['videoUrl'] }}">Here</a></h3>
+                            <h3>Download URL: <a target="_blank" href="{{ $reel['videoUrl'] }}">Here</a></h3>
                         </div>
                     </div>
                 </div>
