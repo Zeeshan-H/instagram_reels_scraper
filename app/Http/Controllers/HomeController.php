@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
-use Instagram\Api;
+use App\API\InstagramService\Api;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 class HomeController extends Controller
@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
         $client = new Client();
 //        $response = $client->get(Config::get('api.url'));
-        $cachePool = new FilesystemAdapter('Instagram', 0, __DIR__ . '/../cache');
+        $cachePool = new FilesystemAdapter('InstagramService', 0, __DIR__ . '/../cache');
         $api = new Api($cachePool);
         $api->login('babybara', 'BloomingToe!!');
         $reelsFeed = null;

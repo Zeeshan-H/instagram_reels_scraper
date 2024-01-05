@@ -30,7 +30,7 @@ class PostInstagramReels extends Command
     {
         $client = new Client();
 //        $response = $client->get("https://www.instagram.com/p/Ctg08REgFI0/?__a=1&__d=dis");
-        $cachePool = new FilesystemAdapter('Instagram', 0, __DIR__ . '/../cache');
+        $cachePool = new FilesystemAdapter('InstagramService', 0, __DIR__ . '/../cache');
         $api = new Api($cachePool);
         $api->login('babybara', 'BloomingToe!!');
         $reelsFeed = [];

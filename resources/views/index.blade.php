@@ -25,7 +25,7 @@
 <h3 class="p-4">Welcome to Social Media Video Scraper</h3>
 
 
-{{--<div class="embedsocial-hashtag" data-ref="27d967cab2282d3b4e7cfbe23bc20e0de9f05209"> <a class="feed-powered-by-es feed-powered-by-es-feed-img" href="https://embedsocial.com/social-media-aggregator/" target="_blank" title="Instagram widget"> <img src="https://embedsocial.com/cdn/images/embedsocial-icon.png" alt="EmbedSocial"> Instagram widget </a> </div>--}}
+{{--<div class="embedsocial-hashtag" data-ref="27d967cab2282d3b4e7cfbe23bc20e0de9f05209"> <a class="feed-powered-by-es feed-powered-by-es-feed-img" href="https://embedsocial.com/social-media-aggregator/" target="_blank" title="InstagramService widget"> <img src="https://embedsocial.com/cdn/images/embedsocial-icon.png" alt="EmbedSocial"> InstagramService widget </a> </div>--}}
 <div id="uploadReels">
 
     <div class="mb-3 p-3">
@@ -177,7 +177,7 @@
                     console.log(error);
                         Swal.fire({
                             title: "Error",
-                            text: 'Error occured while uploading video as reel to Instagram',
+                            text: 'Error occured while uploading video as reel to InstagramService',
                             icon: "error",
                             confirmButtonText: "OK"
                         });

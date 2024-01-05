@@ -39,11 +39,11 @@ class UploadReelController extends Controller
             sleep(10);
             $result = $apiService->graphAPIPostVideoAsReel($videoID);
             if($result) {
-                return response()->json(['success' => 'Video was successfully uploaded as a Instagram reel.']);
+                return response()->json(['success' => 'Video was successfully uploaded as a InstagramService reel.']);
             }
             else
-                return response()->json(['error' => 'Video doesnt meet Instagram reel requirements.']);
+                return response()->json(['error' => 'Video doesnt meet InstagramService reel requirements.']);
         }
-        return response()->json(['error' => 'An error occurred while uploading video as reel to Instagram']);
+        return response()->json(['error' => 'An error occurred while uploading video as reel to InstagramService']);
     }
 }
