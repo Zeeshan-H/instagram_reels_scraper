@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "01b448c80d1ee72320a06f1e651d1066",
+    "content-hash": "845fd10c34a57f56a7df775aacf7b23c",
     "packages": [
         {
             "name": "brick/math",
@@ -2440,6 +2440,83 @@
                 }
             ],
             "time": "2023-02-08T01:06:31+00:00"
+        },
+        {
+            "name": "pgrimaud/instagram-user-feed",
+            "version": "7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pgrimaud/instagram-user-feed.git",
+                "reference": "40763932f6c9796b33a9103fc258079bbe05d22c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pgrimaud/instagram-user-feed/zipball/40763932f6c9796b33a9103fc258079bbe05d22c",
+                "reference": "40763932f6c9796b33a9103fc258079bbe05d22c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^7.0",
+                "php": ">=8.2",
+                "symfony/cache": "^6.0|^7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.45",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9.5",
+                "symfony/var-dumper": "^6.0|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Instagram\\": "src/Instagram/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre Grimaud",
+                    "email": "grimaud.pierre@gmail.com"
+                },
+                {
+                    "name": "Charles Salvan",
+                    "email": "charles.salvan@hotmail.fr"
+                },
+                {
+                    "name": "Tim Bond",
+                    "email": "cookieguru@gmail.com"
+                }
+            ],
+            "description": "This is a scraper to easily fetch any feed and interact with Instagram (like, follow, etc.) without OAuth for PHP.",
+            "homepage": "https://github.com/pgrimaud/instagram-user-feed",
+            "keywords": [
+                "api",
+                "feed",
+                "instagram",
+                "php",
+                "sdk",
+                "social"
+            ],
+            "support": {
+                "issues": "https://github.com/pgrimaud/instagram-user-feed/issues",
+                "source": "https://github.com/pgrimaud/instagram-user-feed/tree/7.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/grimaudpierre",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/pgrimaud",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-12-31T13:38:26+00:00"
         },
         {
             "name": "php-ffmpeg/php-ffmpeg",
