@@ -16,6 +16,7 @@ class HomeController extends Controller
         $response = $client->get(Config::get('api.url'));
 
         $data = json_decode($response->getBody(), true);
+
         return view('index', compact('data'));
     }
 }
