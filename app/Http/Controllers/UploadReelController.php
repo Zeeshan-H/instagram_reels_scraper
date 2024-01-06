@@ -31,9 +31,14 @@ class UploadReelController extends Controller
             $format->setAudioCodec("aac");
             $format->setVideoCodec("libx264");
             $format->setAudioKiloBitrate('128k');
-            $format->setKiloBitrate(3500);
-            $format->setAdditionalParameters(['-pix_fmt', 'yuv420p', '-profile:v', 'baseline', '-level', '3.0', '-movflags', '+faststart']);
-
+            $format->setKiloBitrate(4000); // Adjusted for recommended settings
+            $format->setAdditionalParameters([
+                '-pix_fmt', 'yuv420p',
+                '-profile:v', 'baseline',
+                '-level', '3.0',
+                '-movflags', '+faststart',
+                '-vf', 'scale=1080:1920' // Adjusted for recommended resolution
+            ]);
             $video->save($format, 'Uploads/ffmpeg-'. $uniqueFileName);
 
             $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
