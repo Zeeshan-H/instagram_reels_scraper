@@ -19,8 +19,6 @@ class UploadReelController extends Controller
         $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
         $outputPath = public_path('Uploads/' . $uniqueFileName);
 
-        dd($outputPath);
-
         if($file->move('Uploads', $uniqueFileName))
         {
 
@@ -31,8 +29,9 @@ class UploadReelController extends Controller
             $video = $ffmpeg->open($outputPath);
             $format = new X264();
             $format->setAudioCodec("aac");
-//            $format->setAdditionalParameters(explode(' ', '-pix_fmt yuv420p -b:v 4000k'));
-            $format->setAdditionalParameters(['-pix_fmt', 'yuv420p', '-b:v', '4000k']);
+            $format->setVideoCodec("libx264");
+            $format->setAudioChannels(2); // Set the number of audio channels (adjust as needed)
+            $format->setAdditionalParameters(['-movflags', 'faststart']);
 
             $video->save($format, 'Uploads/ffmpeg-'. $uniqueFileName);
 
