@@ -31,7 +31,7 @@ class UploadReelController extends Controller
             $format->setAudioCodec("aac");
             $format->setVideoCodec("libx264");
             $format->setAudioChannels(2); // Set the number of audio channels (adjust as needed)
-            $format->setAdditionalParameters(['-movflags', 'faststart']);
+            $format->setAdditionalParameters(['-pix_fmt', 'yuv420p', '-profile:v', 'baseline', '-level', '3.0', '-movflags', '+faststart']);
 
             $video->save($format, 'Uploads/ffmpeg-'. $uniqueFileName);
 
