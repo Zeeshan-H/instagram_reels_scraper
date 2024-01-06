@@ -37,8 +37,9 @@ class UploadReelController extends Controller
                 '-profile:v', 'baseline',
                 '-level', '3.0',
                 '-movflags', '+faststart',
-                '-vf', 'scale=1080:1920' // Adjusted for recommended resolution
+                '-b:v', '1500k', // Set the video bitrate (adjust as needed to meet the file size requirement)
             ]);
+
             $video->save($format, 'Uploads/ffmpeg-'. $uniqueFileName);
 
             $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
