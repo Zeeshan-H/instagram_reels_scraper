@@ -34,7 +34,7 @@ class UploadReelController extends Controller
             $ffmpegCommand = "ffmpeg -i \"$outputPath\" " .
                 "-c:v libx264 -aspect 16:9 -crf 18 " .
                 "-vf \"scale=iw*min(1280/iw\\,720/ih):ih*min(1280/iw\\,720/ih),pad=1280:720:(1280-iw)/2:(720-ih)/2\" " .
-                "-fpsmax 60 -preset ultrafast -c:a aac -b:a 128k -ac 1 -pix_fmt yuv420p -movflags +faststart -t 59 -y output.mp4";
+                "-fpsmax 60 -preset ultrafast -c:a aac -b:a 128k -ac 1 -pix_fmt yuv420p -movflags +faststart -t 59 -y Uploads/output.mp4";
 
 
             exec($ffmpegCommand, $output, $returnCode);
