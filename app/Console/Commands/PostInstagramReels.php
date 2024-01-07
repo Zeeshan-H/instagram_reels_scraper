@@ -61,7 +61,6 @@ class PostInstagramReels extends Command
             echo "Video converted and saved successfully.";
 
             $videoUrl = url('Reels/ffmpeg-' . $uniqueFileName);
-            dd($videoUrl);
 
             $apiService = new APIService();
             $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl, "Test");
