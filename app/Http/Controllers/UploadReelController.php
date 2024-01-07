@@ -42,7 +42,7 @@ class UploadReelController extends Controller
                 '-profile:v', 'baseline',
                 '-level', '3.0',
                 '-movflags', '+faststart',
-                '-b:v', '1500k', // Set the video bitrate (adjust as needed to meet the file size requirement)
+                '-b:v', '800k', // Set the video bitrate (adjust as needed to meet the file size requirement)
             ]);
             $video->filters()->clip(\FFMpeg\Coordinate\TimeCode::fromSeconds(0), TimeCode::fromSeconds(50));
 
