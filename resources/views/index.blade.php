@@ -123,7 +123,7 @@
         }
 
         function handleInput2(fileInput) {
-            const maxSizeMB = 10; // Maximum allowed size in megabytes
+            const maxSizeMB = 50; // Maximum allowed size in megabytes
             const maxSizeBytes = maxSizeMB * 1024 * 1024; // Convert to bytes
             const fileSize = fileInput.files[0]?.size;
 

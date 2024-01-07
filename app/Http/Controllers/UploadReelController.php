@@ -30,23 +30,22 @@ class UploadReelController extends Controller
             $videoUrl1 = url('Uploads/' . $uniqueFileName);
 
 //            // Use Laravel-FFMpeg to convert the video
-            $ffmpeg = FFMpeg::create();
-            $video = $ffmpeg->open($outputPath);
-            $format = new X264();
-            $format->setAudioCodec("aac");
-            $format->setVideoCodec("libx264");
-            $format->setAudioKiloBitrate('128k');
-            $format->setKiloBitrate(4000); // Adjusted for recommended settings
-            $format->setAdditionalParameters([
-                '-pix_fmt', 'yuv420p',
-                '-profile:v', 'baseline',
-                '-level', '3.0',
-                '-movflags', '+faststart',
-                '-b:v', '1500k', // Set the video bitrate (adjust as needed to meet the file size requirement)
-            ]);
-            $video->filters()->clip(\FFMpeg\Coordinate\TimeCode::fromSeconds(0), TimeCode::fromSeconds(30));
 
-            $video->save($format, 'Uploads/ffmpeg-'. $uniqueFileName);
+            $ffmpegCommand = "ffmpeg -i \"$outputPath\" " .
+                "-c:v libx264 -profile:v high -level 4.2 -pix_fmt yuv420p -movflags +faststart " .
+                "-c:a aac -b:a 128k -ar 44100 -strict -2 " .
+                "-r 30 -s 720x1280 -b:v 1000k -maxrate 3500k -bufsize 10240k -preset slow -crf 22 " .
+                "-f mp4 -y output_instagram.mp4";
+
+            exec($ffmpegCommand, $output, $returnCode);
+
+            if ($returnCode === 0) {
+                // Successfully executed FFmpeg command
+                echo "Video converted and saved successfully.";
+            } else {
+                // Failed to execute FFmpeg command
+                echo "Error while converting video.";
+            }
 
             $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
 
