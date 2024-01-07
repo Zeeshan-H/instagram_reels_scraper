@@ -41,6 +41,7 @@ class UploadReelController extends Controller
                 echo "Video converted and saved successfully.";
 
                 $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
+                echo "URL is ". $videoUrl2;
 
                 $apiService = new APIService();
                 $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl2, $caption);
