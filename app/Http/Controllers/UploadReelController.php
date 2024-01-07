@@ -17,39 +17,37 @@ class UploadReelController extends Controller
         $file = $request->file('video');
 
         $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
+        $uniqueFileName2 = "ffmpeg-" . $uniqueFileName;
         $outputPath = public_path('Uploads/' . $uniqueFileName);
 
-        if ($file->move('Uploads', $uniqueFileName)) {
-            // Use Laravel-FFMpeg to convert the video
-            $ffmpeg = FFMpeg::create();
-            $video = $ffmpeg->open($outputPath);
-            $format = new X264();
-            $format->setAudioCodec("aac");
-            $format->setVideoCodec("libx264");
-            $format->setAudioKiloBitrate('128k');
-            $format->setKiloBitrate(1500); // Adjust as needed
-            $format->setAdditionalParameters(['-pix_fmt', 'yuv420p', '-profile:v', 'high', '-level', '4.2', '-movflags', '+faststart']);
+        if($file->move('Uploads', $uniqueFileName))
+        {
 
-            $uniqueFileName2 = 'ffmpeg-' . $uniqueFileName;
-            $outputPath2 = public_path('Uploads/' . $uniqueFileName2);
-            $video->save($format, $outputPath2);
 
-            $videoUrl = url('Uploads/' . $uniqueFileName2);
+            $ffmpegCommand = "ffmpeg -i \"$outputPath\" -c:v libx264 -profile:v high -level 4.2 -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 128k -ar 44100 -strict -2 -r 30 -s 640x1136 -t 15 -b:v 1500k -maxrate 1500k -bufsize 10240k -preset slow -crf 22 -f mp4 -y Uploads/\"$uniqueFileName2\"";
 
-            $apiService = new APIService();
-            $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl, $caption);
-            sleep(10);
-            $result = $apiService->graphAPIPostVideoAsReel($videoID);
+            exec($ffmpegCommand, $output, $returnCode);
 
-            if ($result) {
-                return response()->json(['success' => 'Video was successfully uploaded as an Instagram Reel.']);
+            if ($returnCode === 0) {
+                $videoUrl1 = url('Uploads/' . $uniqueFileName2);
+                $apiService = new APIService();
+                $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl1, $caption);
+                sleep(10);
+                $result = $apiService->graphAPIPostVideoAsReel($videoID);
+                if($result) {
+                    return response()->json(['success' => 'Video was successfully uploaded as a InstagramService reel.']);
+                }
+                else
+                    return response()->json(['error' => 'Video doesnt meet InstagramService reel requirements.']);
+                // Successfully executed FFmpeg command
+                echo "Video compressed and saved successfully.";
             } else {
-                return response()->json(['error' => 'Video does not meet Instagram Reel requirements.']);
+                // Failed to execute FFmpeg command
+                echo "Error while compressing video.";
             }
-        } else {
-            return response()->json(['error' => 'An error occurred while uploading video as a reel to Instagram.']);
-        }
 
+
+        }
         return response()->json(['error' => 'An error occurred while uploading video as reel to InstagramService']);
     }
 }
