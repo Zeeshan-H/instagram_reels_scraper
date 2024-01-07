@@ -31,7 +31,10 @@ class UploadReelController extends Controller
 
 //            // Use Laravel-FFMpeg to convert the video
 
-            $ffmpegCommand = "ffmpeg -i \"$outputPath\" -c:v libx264 -preset slow -crf 22 -c:a aac -b:a 192k -movflags +faststart -y Uploads/ffmpeg-\"$uniqueFileName\"";
+            $ffmpegCommand = "ffmpeg -i \"$outputPath\" " .
+                "-c:v libx264 -aspect 16:9 -crf 18 " .
+                "-vf \"scale=iw*min(1280/iw\\,720/ih):ih*min(1280/iw\\,720/ih),pad=1280:720:(1280-iw)/2:(720-ih)/2\" " .
+                "-fpsmax 60 -preset ultrafast -c:a aac -b:a 128k -ac 1 -pix_fmt yuv420p -movflags +faststart -t 59 -y output.mp4";
 
 
             exec($ffmpegCommand, $output, $returnCode);
@@ -52,7 +55,8 @@ class UploadReelController extends Controller
                 }
                 else
                     return response()->json(['error' => 'Video doesnt meet InstagramService reel requirements.']);
-            } else {
+            }
+            else {
                 // Failed to execute FFmpeg command
                 echo "Error while converting video.";
             }
