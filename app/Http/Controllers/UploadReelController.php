@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\API\APIService;
+use FFMpeg\Coordinate\TimeCode;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;;
@@ -43,6 +44,7 @@ class UploadReelController extends Controller
                 '-movflags', '+faststart',
                 '-b:v', '1500k', // Set the video bitrate (adjust as needed to meet the file size requirement)
             ]);
+            $video->filters()->clip(\FFMpeg\Coordinate\TimeCode::fromSeconds(0), TimeCode::fromSeconds(30));
 
             $video->save($format, 'Uploads/ffmpeg-'. $uniqueFileName);
 
