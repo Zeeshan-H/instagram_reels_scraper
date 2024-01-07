@@ -31,6 +31,7 @@ class UploadReelController extends Controller
             if ($returnCode === 0) {
                 $videoUrl1 = url('Uploads/' . $uniqueFileName2);
                 $apiService = new APIService();
+                sleep(10);
                 $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl1, $caption);
                 sleep(10);
                 $result = $apiService->graphAPIPostVideoAsReel($videoID);
