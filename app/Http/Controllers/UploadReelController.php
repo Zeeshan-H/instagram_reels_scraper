@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\API\APIService;
+use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\Format\Video\X264;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;;
+use FFMpeg\FFMpeg;
 use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UploadReelController extends Controller
 {
@@ -19,39 +24,42 @@ class UploadReelController extends Controller
         $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
         $outputPath = public_path('Uploads/' . $uniqueFileName);
 
-        if ($file->move('Uploads', $uniqueFileName)) {
+        if($file->move('Uploads', $uniqueFileName))
+        {
 
-            // Use Laravel-FFMpeg to convert the video
-            $ffmpegCommand = "ffmpeg -i \"$outputPath\" " .
-                "-c:v libx264 -profile:v high -level 4.2 -pix_fmt yuv420p -movflags +faststart " .
-                "-c:a aac -b:a 128k -ar 44100 -strict -2 " .
-                "-r 30 -s 720x1280 -b:v 1000k -maxrate 3500k -bufsize 10240k -preset slow -crf 22 " .
-                "-f mp4 -y Uploads/ffmpeg-\"$uniqueFileName\"";
+            $videoUrl1 = url('Uploads/' . $uniqueFileName);
 
-            exec($ffmpegCommand, $output, $returnCode);
+//            // Use Laravel-FFMpeg to convert the video
+            $ffmpeg = FFMpeg::create();
+            $video = $ffmpeg->open($outputPath);
+            $format = new X264();
+            $format->setAudioCodec("aac");
+            $format->setVideoCodec("libx264");
+            $format->setAudioKiloBitrate('128k');
+            $format->setKiloBitrate(4000); // Adjusted for recommended settings
+            $format->setAdditionalParameters([
+                '-pix_fmt', 'yuv420p',
+                '-profile:v', 'baseline',
+                '-level', '3.0',
+                '-movflags', '+faststart',
+                '-b:v', '1500k', // Set the video bitrate (adjust as needed to meet the file size requirement)
+            ]);
+            $video->filters()->clip(\FFMpeg\Coordinate\TimeCode::fromSeconds(0), TimeCode::fromSeconds(50));
 
-            if ($returnCode === 0) {
-                // Successfully executed FFmpeg command
-                echo "Video converted and saved successfully.";
+            $video->save($format, 'Uploads/ffmpeg-'. $uniqueFileName);
 
-                $videoUrl = url('Uploads/ffmpeg-' . $uniqueFileName);
+            $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
 
-                $apiService = new APIService();
-                $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl, $caption);
-                sleep(10);
-                $result = $apiService->graphAPIPostVideoAsReel($videoID);
-
-                if ($result) {
-                    return response()->json(['success' => 'Video was successfully uploaded as an Instagram reel.']);
-                } else {
-                    return response()->json(['error' => 'Video doesn\'t meet Instagram reel requirements.']);
-                }
-            } else {
-                // Failed to execute FFmpeg command
-                echo "Error while converting video.";
+            $apiService = new APIService();
+            $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl2, $caption);
+            sleep(10);
+            $result = $apiService->graphAPIPostVideoAsReel($videoID);
+            if($result) {
+                return response()->json(['success' => 'Video was successfully uploaded as a InstagramService reel.']);
             }
+            else
+                return response()->json(['error' => 'Video doesnt meet InstagramService reel requirements.']);
         }
-
-        return response()->json(['error' => 'An error occurred while uploading video as a reel to Instagram.']);
+        return response()->json(['error' => 'An error occurred while uploading video as reel to InstagramService']);
     }
 }
