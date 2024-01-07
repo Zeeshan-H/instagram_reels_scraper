@@ -43,7 +43,8 @@ class UploadReelController extends Controller
                 // Successfully executed FFmpeg command
                 echo "Video converted and saved successfully.";
 
-                $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
+//                $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
+                $videoUrl2 = url('Uploads/output.mp4');
                 echo "URL is ". $videoUrl2;
 
                 $apiService = new APIService();
