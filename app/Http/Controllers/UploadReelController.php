@@ -7,6 +7,7 @@ use FFMpeg\Format\Video\X264;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;;
 use FFMpeg\FFMpeg;
+use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UploadReelController extends Controller
@@ -14,6 +15,9 @@ class UploadReelController extends Controller
     public function saveReelToHeroku(Request $request)
     {
         $caption = $request->caption;
+
+        $uploadsDirectory = public_path('Uploads');
+        File::cleanDirectory($uploadsDirectory);
         $file = $request->file('video');
 
         $uniqueFileName = uniqid() . '-' . $file->getClientOriginalName();
