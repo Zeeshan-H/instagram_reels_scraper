@@ -42,22 +42,24 @@ class UploadReelController extends Controller
             if ($returnCode === 0) {
                 // Successfully executed FFmpeg command
                 echo "Video converted and saved successfully.";
+
+                $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
+
+                $apiService = new APIService();
+                $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl2, $caption);
+                sleep(10);
+                $result = $apiService->graphAPIPostVideoAsReel($videoID);
+                if($result) {
+                    return response()->json(['success' => 'Video was successfully uploaded as a InstagramService reel.']);
+                }
+                else
+                    return response()->json(['error' => 'Video doesnt meet InstagramService reel requirements.']);
             } else {
                 // Failed to execute FFmpeg command
                 echo "Error while converting video.";
             }
 
-            $videoUrl2 = url('Uploads/ffmpeg-'. $uniqueFileName);
 
-            $apiService = new APIService();
-            $videoID = $apiService->graphAPIPostVideoToGetID($videoUrl2, $caption);
-            sleep(10);
-            $result = $apiService->graphAPIPostVideoAsReel($videoID);
-            if($result) {
-                return response()->json(['success' => 'Video was successfully uploaded as a InstagramService reel.']);
-            }
-            else
-                return response()->json(['error' => 'Video doesnt meet InstagramService reel requirements.']);
         }
         return response()->json(['error' => 'An error occurred while uploading video as reel to InstagramService']);
     }
